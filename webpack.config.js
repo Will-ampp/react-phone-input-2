@@ -1,10 +1,10 @@
-var path = require('path');
-var webpack = require('webpack');
-var merge = require('webpack-merge');
+var path = require('path')
+var webpack = require("webpack")
+var merge = require("webpack-merge")
 
-var TARGET = process.env.TARGET;
-var ROOT_PATH = path.resolve(__dirname);
-var nodeModulesDir = path.join(ROOT_PATH, 'node_modules');
+var TARGET = process.env.TARGET
+var ROOT_PATH = path.resolve(__dirname)
+var nodeModulesDir = path.join(ROOT_PATH, 'node_modules')
 
 //Common configuration settings
 var common = {
@@ -19,23 +19,39 @@ var common = {
   },
   module: {
     loaders: [
+      // {
+      //   test: /\.(js|jsx)$/,
+      //   // loader: 'babel',
+      //   loader: 'babel-loader',
+      //   options: {
+      //     presets: {
+      //        presets:['es2015', 'react']
+      //     }
+      //   }
+      //   // include: path.resolve(ROOT_PATH, 'src')
+      // },
+
       {
-        test: /\.(js|jsx)$/,
-        loader: 'babel',
-        include: path.resolve(ROOT_PATH, 'src')
-      },
-      {
-        test: /\.png.*$/,
-        loaders: ['url-loader?limit=100000&mimetype=image/png'],
-        exclude: /node_modules/
-      },
-      {
+        test: /\.(js|jsx)?$/,
+        loader: 'babel-loader',
+        query: {
+          presets:['es2015', 'react']
+        }
+      }, {
+      test: /\.(png)$/i,
+      loader: 'url-loader',
+      options: {
+          limit: 100000,
+          mimetype: 'image/png',
+          exclude: /node_modules/
+        }
+      }, {
         test: /\.less$/,
         loader: "style!css!less"
       }
     ]
   }
-};
+}
 
 //Development configuration settings
 if (TARGET === 'dev') {
@@ -111,4 +127,3 @@ if (TARGET === 'build') {
     ]
   });
 }
-

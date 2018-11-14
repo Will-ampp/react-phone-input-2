@@ -1,0 +1,11 @@
+{
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "no-undef": [ 1 ],
+    "no-unsafe-finally": "off",
+    "react/display-name": 0
+  }
+}
